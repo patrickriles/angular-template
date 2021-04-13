@@ -1,0 +1,7 @@
+{
+    "name": "Ng Seed",
+    "baseHref": "ng-seed",
+    "routes": [
+      { "route": "" }
+    ]
+}

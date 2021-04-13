@@ -1,0 +1,91 @@
+{
+  "tags":{
+    "Email": "gngnshfxtools@nielsen.com",
+    "Vertical": "Sports",
+    "Stack": "gns-howser",
+    "Role": "howser-ng-seed-node"
+  },
+  "healthCheck": {
+    "path": "/",
+    "initialDelaySeconds": 60,
+    "timeoutSeconds": 2,
+    "periodSeconds": 10,
+    "failureThreshold": 20
+  },
+  "readyCheck": {
+    "path": "/",
+    "initialDelaySeconds": 60,
+    "timeoutSeconds": 2,
+    "periodSeconds": 10,
+    "failureThreshold": 20
+  },
+  "deployment": {
+    "dockerRegistryUrl": "docker-registry.infrastructure.gracenote.com",
+    "dev-usw2": {
+      "namespace": "sports-curation",
+      "portNumber": 3000,
+      "autoDeploy": false,
+      "minimumInstances": 1,
+      "maximumInstances": 2,
+      "autoscaleCpuThreshold": 85,
+      "initialMemory": "150Mi",
+      "memory": "700Mi",
+      "initialCpu" : "4m",
+      "internalELB": true,
+      "serviceType": "NodePort",
+      "cpu": "1000m",
+      "us": {
+        "cluster": "dev-usw2",
+        "region": "usw2"
+      },
+      "resources": [
+        "k8sDeploymentTemplate",
+        "k8sServiceTemplate",
+        "k8sAutoScaleTemplate"
+      ],
+      "healthCheck": {
+        "path": "/",
+        "initialDelaySeconds": 60,
+        "timeoutSeconds": 2,
+        "periodSeconds": 10,
+        "failureThreshold": 20
+      },
+      "environment": {
+        "NODE_ENV": "testing"
+      }
+    },
+    "prod-usw2": {
+      "namespace": "sports-curation",
+      "portNumber": 3000,
+      "autoDeploy": false,
+      "minimumInstances": 2,
+      "maximumInstances": 5,
+      "autoscaleCpuThreshold": 50,
+      "initialMemory": "500Mi",
+      "memory": "1500Mi",
+      "initialCpu" : "40m",
+      "internalELB": true,
+      "serviceType": "NodePort",
+      "cpu": "1000m",
+      "us": {
+        "cluster": "prod-usw2",
+        "region": "usw2"
+      },
+      "resources": [
+        "k8sDeploymentTemplate",
+        "k8sServiceTemplate",
+        "k8sAutoScaleTemplate"
+      ],
+      "healthCheck": {
+        "path": "/",
+        "initialDelaySeconds": 60,
+        "timeoutSeconds": 2,
+        "periodSeconds": 10,
+        "failureThreshold": 20
+      },
+      "environment": {
+        "NODE_ENV": "prod"
+      }
+    }
+  }
+}

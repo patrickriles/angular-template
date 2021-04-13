@@ -1,0 +1,200 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "gns-howser-ng-seed": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "gns",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "outputPath": "dist/app",
+            "index": "src/web/index.html",
+            "main": "src/web/main.ts",
+            "polyfills": "src/web/polyfills.ts",
+            "tsConfig": "src/web/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "node_modules/@howser/core/assets/",
+                "output": "./assets/"
+              },
+              "src/web/favicon.ico",
+              "src/web/assets"
+            ],
+            "styles": [
+              "src/web/styles.css",
+              "node_modules/@howser/core/assets/scss/main.scss"
+            ],
+            "scripts": [
+              "instana.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/web/environments/environment.ts",
+                  "with": "src/web/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/web/environments/environment.ts",
+                  "with": "src/web/environments/environment.staging.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "testing": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/web/environments/environment.ts",
+                  "with": "src/web/environments/environment.testing.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "local": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/web/environments/environment.ts",
+                  "with": "src/web/environments/environment.local.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "gns-howser-ng-seed:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "gns-howser-ng-seed:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "gns-howser-ng-seed:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/web/test.ts",
+            "polyfills": "src/web/polyfills.ts",
+            "tsConfig": "src/web/tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "styles": [
+              "src/web/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/web/favicon.ico",
+              "src/web/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/web/tsconfig.app.json",
+              "src/web/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "gns-howser-ng-seed-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "gns-howser-ng-seed:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "gns-howser-ng-seed",
+  "cli": {
+    "analytics": "bca0f838-c087-4649-a6dd-7a378f3e9cf9"
+  }
+}

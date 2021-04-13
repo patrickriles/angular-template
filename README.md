@@ -4,7 +4,7 @@
 
 Run `npm install` to install the application dependencies
 
-Run `npm start` to run the app locally. Use environment vairable `NODE_ENV` for different environments
+Run `npm start` to run the app locally.
 
 ## Build
 
